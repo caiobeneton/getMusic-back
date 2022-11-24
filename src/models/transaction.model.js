@@ -1,6 +1,6 @@
 import joi from 'joi'
 
-const transactionSchema = joi.object({
+export const transactionSchema = joi.object({
     userName: joi.string().required().min(3),
     email: joi.string().email().required().min(8),
     cardData: joi.object({

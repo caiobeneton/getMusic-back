@@ -2,8 +2,9 @@ import { productsCollection } from "../database/db";
 import { transactionSchema } from "../models/transaction.model";
 
 export async function transactionValidation(req, res, next) {
-    const { name, email, cardData, productId } = req.body
-    const transaction = { name, email, cardData, productId }
+    const transaction = req.body
+    const { productId } = transaction
+
 
     const { error } = transactionSchema.validation(transaction, { abortEarly: false })
 

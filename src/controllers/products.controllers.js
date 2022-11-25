@@ -1,4 +1,4 @@
-import { productsCollection } from "../database/db";
+import { productsCollection } from "../database/db.js";
 import { v4 as uuidV4 } from "uuid";
 
 export async function insertNewProduct(req, res){

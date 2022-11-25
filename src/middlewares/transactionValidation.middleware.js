@@ -1,5 +1,5 @@
-import { productsCollection } from "../database/db";
-import { transactionSchema } from "../models/transaction.model";
+import { productsCollection } from "../database/db.js";
+import { transactionSchema } from "../models/transaction.model.js";
 
 export async function transactionValidation(req, res, next) {
     const transaction = req.body

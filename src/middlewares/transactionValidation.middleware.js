@@ -6,7 +6,7 @@ export async function transactionValidation(req, res, next) {
     const { productId } = transaction
 
 
-    const { error } = transactionSchema.validation(transaction, { abortEarly: false })
+    const { error } = transactionSchema.validate(transaction, { abortEarly: false })
 
     if (error) {
         const errors = error.map((detail) => detail.message)

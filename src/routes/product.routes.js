@@ -1,8 +1,11 @@
 import { Router } from "express";
 import { insertProductValidation } from "../middlewares/insertProductValidation.middleware.js";
-import { insertNewProduct } from "../controllers/products.controllers.js";
+import { getProducts, insertNewProduct } from "../controllers/products.controllers.js";
 
 const router = Router()
-router.use(insertProductValidation)
 
-router('/products', insertNewProduct)
+router.post('/products', insertProductValidation, insertNewProduct)
+
+router.get('/products', getProducts)
+
+export default router

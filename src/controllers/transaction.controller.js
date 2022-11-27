@@ -1,4 +1,4 @@
-import { productsCollection, transactionsCollection, usersCollection } from "../database/db";
+import { productsCollection, transactionsCollection, usersCollection } from "../database/db.js";
 
 export async function purcharse(req, res) {
     const transaction = req.body

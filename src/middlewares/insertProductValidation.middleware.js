@@ -1,5 +1,5 @@
-import { productsCollection } from "../database/db";
-import { productSchema } from "../models/product.model";
+import { productsCollection } from "../database/db.js";
+import { productSchema } from "../models/product.model.js";
 
 export async function insertProductValidation(req, res, next) {
     const product = req.body;

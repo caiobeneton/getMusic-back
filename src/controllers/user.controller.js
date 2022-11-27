@@ -22,9 +22,13 @@ export async function logIn(req, res) {
     try {
         const userExists = await usersCollection.findOne({email})
 
+        if(!userExists){
+            return res.sendStatus(400).send({message: 'Usuário não cadastrado'})
+        }
+
         await sessionsCollection.insertOne({token, userId: userExists._id})
 
-        res.send({token})
+        res.send({token, userExists})
     } catch (error) {
         res.sendStatus(500)
     }

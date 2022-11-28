@@ -9,7 +9,7 @@ export async function transactionValidation(req, res, next) {
     const { error } = transactionSchema.validate(transaction, { abortEarly: false })
 
     if (error) {
-        const errors = error.map((detail) => detail.message)
+        const errors = error.details.map((detail) => detail.message)
         res.status(400).send(errors)
     }
 

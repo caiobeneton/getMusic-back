@@ -28,7 +28,7 @@ export async function logIn(req, res) {
 
         await sessionsCollection.insertOne({token, userId: userExists._id})
 
-        res.send({token, userExists})
+        res.send({token})
     } catch (error) {
         res.sendStatus(500)
     }

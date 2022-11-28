@@ -16,5 +16,10 @@ export async function insertNewProduct(req, res){
 }
 
 export async function getProducts(req, res){
-    
+    try {
+       const products = await productsCollection.find().toArray()
+       res.send({products})
+    } catch (error) {
+        res.sendStatus(500)
+    }
 }

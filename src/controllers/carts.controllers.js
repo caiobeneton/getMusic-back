@@ -3,7 +3,7 @@ import { cartsCollection, productsCollection, sessionsCollection } from '../data
 
 export async function getCart(req, res) {
     const { authorization } = req.headers
-    const token = authorization.replace('Bearer: ', '')
+    const token = authorization.replace('Bearer ', '')
     
     try {
         const session = await sessionsCollection.findOne({token})
@@ -23,8 +23,8 @@ export async function getCart(req, res) {
 
 export async function postCart(req, res){
     const { authorization } = req.headers
-    const token = authorization.replace('Bearer: ', '')
-    const itemID = req.body
+    const token = authorization.replace('Bearer ', '')
+    const { itemID } = req.body
 
     if (!token) {
         return res.sendStatus(401).send({message: "Você precisa estar logado para adicionar ao carrinho"})
@@ -34,11 +34,18 @@ export async function postCart(req, res){
         const session = await sessionsCollection.findOne({token})
         const userId = session._id
         const cart = await cartsCollection.findOne({userId})
-        const product = await productsCollection.findOne({_id: itemID})
-        cart.content.push(product)
+
+        if (!cart) {
+            await cartsCollection.insertOne({userId, content: [], subTotal: 0})
+        }
+    
+        const product = await productsCollection.findOne({itemID})
+
+        await cartsCollection.insertOne({token, product})
 
         res.sendStatus(200)
     } catch (error) {
+        console.log(error)
         res.sendStatus(500)
     }
 }

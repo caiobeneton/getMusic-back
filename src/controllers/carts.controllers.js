@@ -2,7 +2,8 @@ import { cartsCollection, sessionsCollection } from '../database/db.js'
 
 
 export async function getCart(req, res) {
-    const { token } = req.headers
+    const { authorization } = req.headers
+    const token = authorization.replace('Bearer: ', '')
     
     try {
         const session = await sessionsCollection.findOne({token})

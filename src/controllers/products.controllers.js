@@ -14,3 +14,7 @@ export async function insertNewProduct(req, res){
         res.sendStatus(500)
     }
 }
+
+export async function getProducts(req, res){
+    
+}

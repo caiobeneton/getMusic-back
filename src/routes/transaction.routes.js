@@ -5,9 +5,7 @@ import { purcharse } from "../controllers/transaction.controller.js";
 const router = Router()
 
 
-router.use(transactionValidation)
-
-router.post('/purcharse', purcharse)
+router.post('/purcharse', transactionValidation, purcharse)
 
 
 export default router
